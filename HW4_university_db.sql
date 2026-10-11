@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 -- Student Name: Giang Anh Tú
 -- Student ID: 24070407
 
@@ -30,11 +31,30 @@ CREATE TABLE semesters (
     name VARCHAR(50) NOT NULL UNIQUE,                          
     start_date DATE NOT NULL,                                 
     end_date DATE NOT NULL,                                    
+=======
+CREATE DATABASE university_db
+USE university_db;
+
+CREATE TABLE departments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(10) NOT NULL UNIQUE,                        
+    name VARCHAR(100) NOT NULL UNIQUE,                         
+    description TEXT NULL,                                   
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP     
+) ENGINE=InnoDB;
+
+CREATE TABLE semesters (
+    id INT AUTO_INCREMENT PRIMARY KEY,                       
+    name VARCHAR(50) NOT NULL UNIQUE,                          
+    start_date DATE NOT NULL,                                  
+    end_date DATE NOT NULL,                                   
+>>>>>>> a87c625dd91921f28f4fd47a69eee1a7c87d7b25
     status ENUM('planned', 'ongoing', 'completed')             
         NOT NULL DEFAULT 'planned',
     CHECK (end_date > start_date)                              
 ) ENGINE=InnoDB;
 
+<<<<<<< HEAD
 -- 4. INSTRUCTORS
 DROP TABLE IF EXISTS instructors;
 
@@ -45,6 +65,15 @@ CREATE TABLE instructors (
     email VARCHAR(150) NOT NULL UNIQUE,                       
     phone VARCHAR(20) NULL UNIQUE,                             
     gender ENUM('male', 'female', 'other') NOT NULL,          
+=======
+CREATE TABLE instructors (
+    id INT AUTO_INCREMENT PRIMARY KEY,                       
+    instructor_code VARCHAR(20) NOT NULL UNIQUE,             
+    full_name VARCHAR(100) NOT NULL,                         
+    email VARCHAR(150) NOT NULL UNIQUE,                        
+    phone VARCHAR(20) NULL UNIQUE,                           
+    gender ENUM('male', 'female', 'other') NOT NULL,           
+>>>>>>> a87c625dd91921f28f4fd47a69eee1a7c87d7b25
     academic_title VARCHAR(50) NULL,                           
     department_id INT NOT NULL,                                
     hire_date DATE NOT NULL,                                   
@@ -53,6 +82,7 @@ CREATE TABLE instructors (
         FOREIGN KEY (department_id)
         REFERENCES departments(id)
         ON DELETE RESTRICT                                      
+<<<<<<< HEAD
         ON UPDATE CASCADE                                       
 ) ENGINE=InnoDB;
 
@@ -64,6 +94,16 @@ CREATE TABLE students (
     student_code VARCHAR(20) NOT NULL UNIQUE,                  
     full_name VARCHAR(100) NOT NULL,                           
     email VARCHAR(150) NOT NULL UNIQUE,                        
+=======
+        ON UPDATE CASCADE                                      
+) ENGINE=InnoDB;
+
+CREATE TABLE students (
+    id INT AUTO_INCREMENT PRIMARY KEY,                   
+    student_code VARCHAR(20) NOT NULL UNIQUE,                 
+    full_name VARCHAR(100) NOT NULL,                           
+    email VARCHAR(150) NOT NULL UNIQUE,                         
+>>>>>>> a87c625dd91921f28f4fd47a69eee1a7c87d7b25
     phone VARCHAR(20) NULL UNIQUE,                             
     gender ENUM('male', 'female', 'other') NOT NULL,          
     date_of_birth DATE NOT NULL,                               
@@ -79,18 +119,27 @@ CREATE TABLE students (
         ON UPDATE CASCADE                                       
 ) ENGINE=InnoDB;
 
+<<<<<<< HEAD
 -- 6. COURSES
 DROP TABLE IF EXISTS courses;
 
 CREATE TABLE courses (
     id INT AUTO_INCREMENT PRIMARY KEY,                         
+=======
+CREATE TABLE courses (
+    id INT AUTO_INCREMENT PRIMARY KEY,                   
+>>>>>>> a87c625dd91921f28f4fd47a69eee1a7c87d7b25
     course_code VARCHAR(20) NOT NULL UNIQUE,                   
     course_name VARCHAR(150) NOT NULL,                         
     description TEXT NULL,                                     
     credits INT NOT NULL DEFAULT 3,                            
     department_id INT NOT NULL,                                
     instructor_id INT NOT NULL,                                
+<<<<<<< HEAD
     max_students INT NOT NULL DEFAULT 50,                     
+=======
+    max_students INT NOT NULL DEFAULT 50,                      
+>>>>>>> a87c625dd91921f28f4fd47a69eee1a7c87d7b25
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,    
 
     CONSTRAINT chk_courses_credits
@@ -103,7 +152,11 @@ CREATE TABLE courses (
         FOREIGN KEY (department_id)
         REFERENCES departments(id)
         ON DELETE RESTRICT                                      
+<<<<<<< HEAD
         ON UPDATE CASCADE,                                     
+=======
+        ON UPDATE CASCADE,                                      
+>>>>>>> a87c625dd91921f28f4fd47a69eee1a7c87d7b25
 
     CONSTRAINT fk_courses_instructor
         FOREIGN KEY (instructor_id)
@@ -112,9 +165,12 @@ CREATE TABLE courses (
         ON UPDATE CASCADE                                       
 ) ENGINE=InnoDB;
 
+<<<<<<< HEAD
 -- 7. ENROLLMENTS
 DROP TABLE IF EXISTS enrollments;
 
+=======
+>>>>>>> a87c625dd91921f28f4fd47a69eee1a7c87d7b25
 CREATE TABLE enrollments (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,                      
     student_id INT NOT NULL,                                   
@@ -123,18 +179,30 @@ CREATE TABLE enrollments (
     enrolled_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,   
     grade_point DECIMAL(4,2) NULL,                             
     grade_letter ENUM('A', 'B+', 'B', 'C+', 'C', 'D+', 'D', 'F')
+<<<<<<< HEAD
         NULL,                                                   
+=======
+        NULL,                                                  
+>>>>>>> a87c625dd91921f28f4fd47a69eee1a7c87d7b25
     status ENUM('enrolled', 'completed', 'dropped')
         NOT NULL DEFAULT 'enrolled',                           
 
     CONSTRAINT chk_enrollments_grade_point
         CHECK (grade_point IS NULL OR grade_point BETWEEN 0.00 AND 4.00),
+<<<<<<< HEAD
+=======
+                                                                    
+>>>>>>> a87c625dd91921f28f4fd47a69eee1a7c87d7b25
 
     CONSTRAINT fk_enrollments_student
         FOREIGN KEY (student_id)
         REFERENCES students(id)
         ON DELETE CASCADE                                      
+<<<<<<< HEAD
         ON UPDATE CASCADE,                                     
+=======
+        ON UPDATE CASCADE,                                    
+>>>>>>> a87c625dd91921f28f4fd47a69eee1a7c87d7b25
 
     CONSTRAINT fk_enrollments_course
         FOREIGN KEY (course_id)
@@ -149,10 +217,16 @@ CREATE TABLE enrollments (
         ON UPDATE CASCADE,                                      
 
     CONSTRAINT unique_enrollment
+<<<<<<< HEAD
         UNIQUE (student_id, course_id, semester_id)            
 ) ENGINE=InnoDB;
 
 -- SAMPLE DATA
+=======
+        UNIQUE (student_id, course_id, semester_id)             
+) ENGINE=InnoDB;
+
+>>>>>>> a87c625dd91921f28f4fd47a69eee1a7c87d7b25
 INSERT INTO departments (code, name, description) VALUES
 ('MIS', 'Management Information Systems',
  'Study of information systems, business processes, databases, and digital transformation.'),
@@ -177,6 +251,7 @@ INSERT INTO semesters (name, start_date, end_date, status) VALUES
 INSERT INTO instructors
     (instructor_code, full_name, email, phone, gender, academic_title, department_id, hire_date)
 VALUES
+<<<<<<< HEAD
 ('GV001', 'Nguyễn Minh Quân', 'quan.nguyen@university.edu.vn', '0903123456',
  'male', 'PhD', 1, '2018-08-15'),
 
@@ -222,6 +297,55 @@ VALUES
 ('25070008', 'Hoàng Ngọc Anh', 'anh.hoang25070008@student.edu.vn', '0901000008',
  'female', '2007-05-19', 3, '2025-09-02', 'active');
 
+=======
+('GV001', 'Nguyễn Minh Quân', 'quan.nguyen@vnu.edu.vn', '0903123456',
+ 'male', 'PhD', 1, '2018-08-15'),
+
+('GV002', 'Trần Thị Lan Anh', 'lananh.tran@vnu.edu.vn', '0912345678',
+ 'female', 'Assoc. Prof.', 2, '2016-09-01'),
+
+('GV003', 'Lê Hoàng Nam', 'nam.le@vnu.edu.vn', '0987654321',
+ 'male', 'PhD', 3, '2020-01-10'),
+
+('GV004', 'Phạm Thu Hà', 'ha.pham@vnu.edu.vn', '0934567890',
+ 'female', 'PhD', 4, '2019-03-05'),
+
+('GV005', 'Vũ Đức Thành', 'thanh.vu@vnu.edu.vn', '0978123456',
+ 'male', 'Dr.', 5, '2021-08-20'),
+
+('GV006', 'Đỗ Ngọc Mai', 'mai.do@vnu.edu.vn', '0966789123',
+ 'female', 'PhD', 6, '2022-02-15');
+
+
+INSERT INTO students
+    (student_code, full_name, email, phone, gender, date_of_birth, department_id, enrollment_date, status)
+VALUES
+('24070001', 'Nguyễn Hoàng Anh', '24070001@vnu.edu.vn', '0901000001',
+ 'male', '2006-04-12', 1, '2024-09-03', 'active'),
+
+('24070002', 'Trần Minh Đức', '24070002@vnu.edu.vn', '0901000002',
+ 'male', '2006-08-21', 2, '2024-09-03', 'active'),
+
+('24070003', 'Lê Thu Trang', '24070003@vnu.edu.vn', '0901000003',
+ 'female', '2006-02-17', 3, '2024-09-03', 'active'),
+
+('24070004', 'Phạm Quỳnh Mai', '24070004@vnu.edu.vn', '0901000004',
+ 'female', '2006-11-05', 4, '2024-09-03', 'active'),
+
+('24070005', 'Vũ Anh Tuấn', '24070005@vnu.edu.vn', '0901000005',
+ 'male', '2006-06-30', 5, '2024-09-03', 'active'),
+
+('24070006', 'Đỗ Khánh Linh', '24070006@vnu.edu.vn', '0901000006',
+ 'female', '2006-09-14', 1, '2024-09-03', 'active'),
+
+('25070007', 'Nguyễn Gia Huy', '25070007@vnu.edu.vn', '0901000007',
+ 'male', '2007-01-23', 6, '2025-09-02', 'active'),
+
+('25070008', 'Hoàng Ngọc Anh', '25070008@vnu.edu.vn', '0901000008',
+ 'female', '2007-05-19', 3, '2025-09-02', 'active');
+
+
+>>>>>>> a87c625dd91921f28f4fd47a69eee1a7c87d7b25
 INSERT INTO courses
     (course_code, course_name, description, credits, department_id, instructor_id, max_students)
 VALUES
